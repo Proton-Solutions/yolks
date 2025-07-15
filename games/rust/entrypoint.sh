@@ -28,9 +28,14 @@ echo ":/home/container$ ${MODIFIED_STARTUP}"
 
 if [[ "${FRAMEWORK}" == "carbon" ]]; then
     # Carbon: https://github.com/CarbonCommunity/Carbon
-    echo "Updating Carbon..."
-    curl -sSL "https://github.com/CarbonCommunity/Carbon/releases/download/production_build/Carbon.Linux.Release.tar.gz" | tar zx
-    echo "Done updating Carbon!"
+    
+	if [[ "${SKIP_INSTALL}" == "0"]]; then
+	 	echo "Updating Carbon..."
+    	curl -sSL "https://github.com/CarbonCommunity/Carbon/releases/download/production_build/Carbon.Linux.Release.tar.gz" | tar zx
+    	echo "Done updating Carbon!"
+ 	else
+  		echo "Skipping framework install..."
+  	fi
 
     export DOORSTOP_ENABLED=1
     export DOORSTOP_TARGET_ASSEMBLY="$(pwd)/carbon/managed/Carbon.Preloader.dll"
